@@ -15,9 +15,6 @@ const init = async () => {
       "name": "Sandy Smith",
       "email": "sandy@example.com"
     },
-    //options: { streaming: false } // turning off to implement a listener
-    options: {} // turning off to implement a listener
-
   });
 
   createRoot(document.getElementById('root')).render(
