@@ -1,10 +1,7 @@
 import React from "react";
 import * as contentful from "contentful";
 import "./ProductCatalog.css";
-import { useFlags } from 'launchdarkly-react-client-sdk';
-import { useEffect} from 'react';
-import { useState } from 'react';
-import { useLDClient } from 'launchdarkly-react-client-sdk';
+import { useFlags, useLDClient } from 'launchdarkly-react-client-sdk';
 
 // ordinarily these should be saved in an .ENV file
 // but these are demo credentials that are public!
@@ -32,11 +29,33 @@ const ProductCatalog = () => {
  return <ProductList products={products} />;
 };
 
+const useCompactFlag = () => {
+  const client = useLDClient();
+  const [compactGrid, setCompactGrid] = React.useState(false);
+
+  React.useEffect(() => {
+    const key = 'Compact-grid';
+    const initialValue = client.variation(key, false);
+    setCompactGrid(initialValue);
+
+    const onSettingsChange = (settings) => {
+      console.log(settings);
+      const value = settings[key].current;
+
+      setCompactGrid(value);
+    };
+
+    client.on('change', onSettingsChange);
+  }, [client]);
+
+  return compactGrid;
+};
 
 const ProductList = ({ products }) => {
+  const compactGrid = useCompactFlag();
 
-  const { compactGrid } = useFlags();
-  console.log("compactGrid", compactGrid);
+  //const { compactGrid } = useFlags();
+  //console.log("compactGrid", compactGrid);
 
   const containerClass = compactGrid ? 'products-compact-grid' : 'products';
 
@@ -51,47 +70,6 @@ const ProductList = ({ products }) => {
  );
 };
 
-/*const [containerClass, setContainerClass] = useState('products');
-const ldClient = useLDClient();
-
-const ProductList = ({ products }) => {
-
-  useEffect(() => {
-    if (!ldClient) return;
-
-    const flagKey = 'Compact-grid';
-
-    // Function to update the container class based on flag value
-    const updateContainerClass = (flagValue) => {
-      setContainerClass(flagValue ? 'products-compact-grid' : 'products');
-    };
-
-    // Get the initial flag value
-    const initialFlagValue = ldClient.variation(flagKey, false);
-    updateContainerClass(initialFlagValue);
-
-    // Listener for flag changes
-    const handleFlagChange = (newValue) => {
-      updateContainerClass(newValue);
-    };
-
-    // Register the listener
-    ldClient.on(`change:${flagKey}`, handleFlagChange);
-
-    // Cleanup the listener on component unmount
-    return () => {
-      ldClient.off(`change:${flagKey}`, handleFlagChange);
-    };
-  }, [ldClient]);
-    return (
-      <div className={containerClass}>
-        {products.map((product) => (
-          <ProductItem key={product.sys.id} product={product} />
-        ))}
-      </div>
-    );
- }
-*/
 const ProductItem = ({ product }) => {
  const { fields } = product;
 
@@ -109,7 +87,6 @@ const ProductItem = ({ product }) => {
 
  const ProductDetails = ({ fields }) => {
   const { showProductTags } = useFlags();
-  console.log("showProductTags", showProductTags);
 
   return (
     <>
