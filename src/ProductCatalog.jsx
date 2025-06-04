@@ -52,10 +52,13 @@ const useCompactFlag = () => {
 };
 
 const ProductList = ({ products }) => {
-  const compactGrid = useCompactFlag();
 
-  //const { compactGrid } = useFlags();
-  //console.log("compactGrid", compactGrid);
+  //use manual listener
+  //const compactGrid = useCompactFlag();
+
+  //use LD Flag
+  const { compactGrid } = useFlags();
+  console.log("compactGrid", compactGrid);
 
   const containerClass = compactGrid ? 'products-compact-grid' : 'products';
 
@@ -90,7 +93,7 @@ const ProductItem = ({ product }) => {
 
   return (
     <>
-      <ProductHeader fields={fields} />
+      <ProductHeaderAlmostGone fields={fields} />
       <p className="product-categories">
         {fields.categories.map((category) => category.fields.title).join(", ")}
       </p>
@@ -117,6 +120,29 @@ const ProductHeader = ({ fields }) => {
    </div>
  );
 };
+
+const ProductHeaderAlmostGone = ({ fields }) => {
+
+  //id of the Norman Copenhagen brand
+  const isAlmostGone = fields.brand.sys.id === '651CQ8rLoIYCeY6G0QG22q';
+
+  return (
+    <div className="product-header">
+      <h2>
+        <a href={`product/${fields.slug}`}>{fields.productName}</a>
+      </h2>
+      {isAlmostGone && 
+      <h2>
+        <span className="almost-gone">Almost Gone!</span>
+      </h2> 
+      }
+      {" by "}
+      <a href={`brand/${fields.brand.sys.id}`}>
+        {fields.brand.fields.companyName}
+      </a>
+    </div>
+  );
+ };
 
 const ProductImage = ({ image, slug }) => {
  if (image && image.fields.file) {
