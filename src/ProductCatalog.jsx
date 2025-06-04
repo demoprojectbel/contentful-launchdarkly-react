@@ -90,10 +90,15 @@ const ProductItem = ({ product }) => {
 
  const ProductDetails = ({ fields }) => {
   const { showProductTags } = useFlags();
+  const { useFlashSale } = useFlags();
 
   return (
     <>
-      <ProductHeaderAlmostGone fields={fields} />
+    {
+      useFlashSale
+        ? <ProductHeaderAlmostGone fields={fields} />
+        : <ProductHeader fields={fields} />
+    }
       <p className="product-categories">
         {fields.categories.map((category) => category.fields.title).join(", ")}
       </p>
