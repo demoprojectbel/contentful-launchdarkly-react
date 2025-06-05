@@ -6,8 +6,8 @@ function App() {
 
   return (
     <>
-      <h1>LaunchDarkly + Contentful</h1>
-      <h2>Product Catalog Demo</h2>
+      <h1>LaunchDarkly Studio</h1>
+      <h2>Product Catalog</h2>
       <ProductCatalog />
     </>
   )

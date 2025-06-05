@@ -14,6 +14,12 @@
   gap: 2rem;
 }
 
+@media (min-width: 650px) {
+  .products-compact-grid {
+    width: 650px;
+  }
+}
+
 .product-in-list {
   border: 1px solid #e0e0e0;
   border-radius: 8px;
