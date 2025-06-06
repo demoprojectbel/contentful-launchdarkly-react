@@ -22,7 +22,8 @@ const init = async () => {
         "name" : "Modern Form",
         "location": "France"  
       },
-    }, 
+    },
+    
     /*
     //Flash Sale Target individual on for Mary
      context: {
@@ -72,7 +73,8 @@ const init = async () => {
         "name" : "Northern Creatives",
         "location": "USA"
       },
-    },*/
+    },
+    */
   });
 
   createRoot(document.getElementById('root')).render(

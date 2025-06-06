@@ -27,23 +27,31 @@ The useFlashSale flag is configured to target:
 - An individual user: Mary Reed
 - Any organization where the location attribute is USA
 
-When the flag is evaluated to True, the "Almost Gone!" notice will appear on items by Normann Copenhagen. In all other cases the flag serves false and the notice is hidden.
+When the flag is evaluated to True, the "Almost Gone!" notice will appear on items by Normann Copenhagen. In all other cases the flag serves False and the notice is hidden.
 
-#### Individual Targeting:
-In main.jsx, lines 14-27 define a multi context that includes the user Mary Reed.  Because she is individually targeted, the flag evaluates to True and the "Almost Gone!" notice appears.
+#### Individual Targeting - Target Mary Reed
+** Test Case A: **
 
-#### Rule Based Targeting
+- Edit main.jsx
+- Comment out lines 11-26 (add a /* at line 11, */ at line 26)
+- Uncomment lines 27-43 (remove the /* at line 27, remove */ at line 43)
+- Save
+
+Here we define a multi context that includes the user Mary Reed.  Because she is individually targeted, the flag evaluates to True and the "Almost Gone!" notice appears.
+
+#### Rule Based Targeting - Target USA locations
 **Test Case A:**
 
-- Comment out lines 14-27
-- Uncomment lines 31-44
+- Comment out lines 27-43 (add a /* at line 27, */ at line 43)
+- Uncomment lines 44-60 (remove the /* at line 44, remove */ at line 60)
+- Save
 
 The Organization's Location is not USA; the flag evaluates to false and the "Almost Gone!" notice is not shown
 
 **Test Case B:**
 
-- Comment out lines 31-44
-- Uncomment lines 48-61
+- Comment out lines 44-60
+- Uncomment lines 61-77
 
 The Organizations's location is USA; the flag evaluates to true and the "Almost Gone!" notice appears.
   
