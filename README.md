@@ -3,7 +3,7 @@
 Clone the repository to your local machine
 ```
 $ git clone https://github.com/launchdarkly-labs/contentful-launchdarkly-react.git
-$ cd contentful-launchdarkly
+$ cd contentful-launchdarkly-react/contentful-launchdarkly
 $ npm install
 $ npm run dev
 ```
