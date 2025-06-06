@@ -31,12 +31,12 @@ const ProductCatalog = () => {
 
 const useCompactFlag = () => {
   const client = useLDClient();
-  const [compactGrid, setCompactGrid] = React.useState(false);
+  const [compactGrid, setCompactGrid] = React.useState(false); //set the current state to false
 
   React.useEffect(() => {
     const key = 'Compact-grid';
-    const initialValue = client.variation(key, false);
-    setCompactGrid(initialValue);
+    const initialValue = client.variation(key, false); //retrive the flag, default to false
+    setCompactGrid(initialValue); //update the state
 
     const onSettingsChange = (settings) => {
       console.log(settings);
@@ -45,7 +45,7 @@ const useCompactFlag = () => {
       setCompactGrid(value);
     };
 
-    client.on('change', onSettingsChange);
+    client.on('change', onSettingsChange); //any change we get the update
   }, [client]);
 
   return compactGrid;
@@ -77,7 +77,7 @@ const ProductItem = ({ product }) => {
  const { fields } = product;
 
  return (
-   <div className="product-in-list">
+   <div role="button" className="product-in-list" onClick={()=> console.log('product clicked!', fields.productName)}>
      <div className="product-image">
        <ProductImage image={fields.image[0]} slug={fields.slug} />
      </div>
@@ -99,7 +99,7 @@ const ProductItem = ({ product }) => {
         ? <ProductHeaderAlmostGone fields={fields} />
         : <ProductHeader fields={fields} />
     }
-      <p className="product-categories">
+      <p className="product-caƒtegories">
         {fields.categories.map((category) => category.fields.title).join(", ")}
       </p>
       <p>{fields.price} &euro;</p>
@@ -115,13 +115,11 @@ const ProductItem = ({ product }) => {
 const ProductHeader = ({ fields }) => {
  return (
    <div className="product-header">
-     <h2>
-       <a href={`product/${fields.slug}`}>{fields.productName}</a>
-     </h2>
-     {" by "}
-     <a href={`brand/${fields.brand.sys.id}`}>
-       {fields.brand.fields.companyName}
-     </a>
+    <h2>
+      {fields.productName}
+    </h2>
+    {" by "}
+    {fields.brand.fields.companyName}
    </div>
  );
 };
@@ -134,7 +132,7 @@ const ProductHeaderAlmostGone = ({ fields }) => {
   return (
     <div className="product-header">
       <h2>
-        <a href={`product/${fields.slug}`}>{fields.productName}</a>
+        {fields.productName}
       </h2>
       {isAlmostGone && 
       <h2>
@@ -142,9 +140,7 @@ const ProductHeaderAlmostGone = ({ fields }) => {
       </h2> 
       }
       {" by "}
-      <a href={`brand/${fields.brand.sys.id}`}>
         {fields.brand.fields.companyName}
-      </a>
     </div>
   );
  };
@@ -152,12 +148,10 @@ const ProductHeaderAlmostGone = ({ fields }) => {
 const ProductImage = ({ image, slug }) => {
  if (image && image.fields.file) {
    return (
-     <a href={`product/${slug}`}>
        <img
          src={image.fields.file.url}
          alt={image.fields.title || "Product image"}
        />
-     </a>
    );
  }
  return null;

@@ -6,11 +6,25 @@ import { asyncWithLDProvider } from 'launchdarkly-react-client-sdk';
 
 const init = async () => {
   const LDProvider = await asyncWithLDProvider({
-    clientSideID: '6838671602a68a090f0fec81', //production
-    //clientSideID: '6838671602a68a090f0fec80', //test
+    clientSideID: '6838671602a68a090f0fec81', //production key goes here
+    //clientSideID: '6838671602a68a090f0fec80', //test key
 
+    context: {
+      "kind": "multi",
+      user: {
+        "kind": "user",
+        "key": "user-key-554ref",
+        "name": "Blake White",
+        "email": "blwhite@example.com"
+        },
+      organization: {
+        "key": "organization-key-133wwe",
+        "name" : "Modern Form",
+        "location": "France"  
+      },
+    }, 
     /*
-     //Flash Sale Target individual on for Mary
+    //Flash Sale Target individual on for Mary
      context: {
       "kind": "multi",
       user: {
@@ -24,17 +38,17 @@ const init = async () => {
         "name" : "Hollier",
         "location": "Italy"  
       },
-    },*/
-
+    },
+*/
     /*
     //Flash Sale off rule based - non USA location
     context: {
       "kind": "multi",
       user: {
         "kind": "user",
-        "key": "user-key-242ply",
-        "name": "Holly Barker",
-        "email": "hbarker@example.com"
+        "key": "user-key-432rat",
+        "name": "Trent Ergan",
+        "email": "tergan@example.com"
         },
       organization: {
         "key": "org-key-263wwc",
@@ -43,22 +57,22 @@ const init = async () => {
       },
     },
 */
+/*
     //Flash Sale on rule - US
     context: {
       "kind": "multi",
       user: {
         "kind": "user",
-        "key": "user-key-123olp",
-        "name": "Ryan Yill",
-        "email": "Ryill@example.com"
+        "key": "user-key-122uuu",
+        "name": "Len Br",
+        "email": "lbr@example.com"
         },
       organization: {
         "key": "org-key-123eed",
         "name" : "Northern Creatives",
         "location": "USA"
       },
-    },
-
+    },*/
   });
 
   createRoot(document.getElementById('root')).render(
