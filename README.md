@@ -17,6 +17,10 @@ Jump into the LaunchDarkly project
 
 Toggle the compact-grid feature flag **On** to display two images in one row.  Toggle the flag **Off** to display one image per row.  You can toggle the compact-grid feature flag [here](https://app.launchdarkly.com/projects/default/flags/Compact-grid/targeting?env=production&selected-env=production)
 
+or toggle the flag OFF here:
+```
+curl -X POST https://app.launchdarkly.com/webhook/triggers/68435eb981dd4b0926662984/79bceef5-a21f-4c46-9a82-53b110a5077f
+```
 
 ---
 
@@ -30,7 +34,7 @@ The useFlashSale flag is configured to target:
 When the flag is evaluated to True, the "Almost Gone!" notice will appear on items by Normann Copenhagen. In all other cases the flag serves False and the notice is hidden.
 
 #### Individual Targeting - Target Mary Reed
-** Test Case A: **
+**Test Case A:**
 
 - Edit main.jsx
 - Comment out lines 11-26 (add a /* at line 11, */ at line 26)

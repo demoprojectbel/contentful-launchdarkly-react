@@ -75,6 +75,23 @@ const init = async () => {
       },
     },
     */
+     //useProductTag targeted segment user
+     /*
+     context: {
+      "kind": "multi",
+      user: {
+        "kind": "user",
+        "key": "user-key-111olp",
+        "name": "Aaron Poil",
+        "email": "apoil@example.com"
+        },
+      organization: {
+        "key": "org-key-445red",
+        "name" : "Hollier",
+        "location": "Italy"  
+      },
+    },
+    */
   });
 
   createRoot(document.getElementById('root')).render(
